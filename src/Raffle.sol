@@ -34,6 +34,9 @@ contract Raffle {
     uint256 private immutable i_entranceFee;
     address payable[] private s_players; //we make address payable, since we need to pay raffle price to them eventually
 
+    // Events 
+    event RaffleEntered(address indexed player);
+
     constructor(uint256 entranceFee) {
         i_entranceFee = entranceFee;
     }
@@ -49,6 +52,7 @@ contract Raffle {
         //Why we emit events?
         //1. Makes migration to a new contract easier.
         //2. Makes front end "indexing" easier.
+        emit RaffleEntered(msg.sender);
     }
 
     function pickWinner() public {
