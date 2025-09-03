@@ -1,1 +1,2 @@
 forge-std-1.10.0/=dependencies/forge-std-1.10.0/
+smartcontractkit-chainlink-evm-0.3.2/=dependencies/smartcontractkit-chainlink-evm-0.3.2/contracts/src
