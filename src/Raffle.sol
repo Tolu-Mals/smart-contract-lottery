@@ -34,6 +34,7 @@ import {VRFV2PlusClient} from "smartcontractkit-chainlink-evm-0.3.2/v0.8/vrf/dev
 contract Raffle is VRFConsumerBaseV2Plus {
     // Errors
     error Raffle__SendMoreToEnterRaffle();
+    error Raffle_TransferFailed();
 
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private constant NUM_WORDS = 1;
@@ -45,6 +46,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     uint256 private immutable i_interval;
     address payable[] private s_players; //we make address payable, since we need to pay raffle price to them eventually
     uint256 private s_lastTimeStamp;
+    address private s_recentWinner;
 
     // Events
     event RaffleEntered(address indexed player);
@@ -103,7 +105,16 @@ contract Raffle is VRFConsumerBaseV2Plus {
         uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
-    function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {}
+    function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
+        uint256 indexOfWinner = randomWords[0] % s_players.length;
+        address payable recentWinner = s_players[indexOfWinner];
+        s_recentWinner = recentWinner;
+        (bool success,) = recentWinner.call{value: address(this).balance}("");
+
+        if(!success){
+            revert Raffle_TransferFailed();
+        }
+    }
 
     /**
      * Getter Functions
