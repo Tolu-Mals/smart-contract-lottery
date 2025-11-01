@@ -22,8 +22,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {VRFConsumerBaseV2Plus} from "smartcontractkit-chainlink-evm-0.3.2/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
-import {VRFV2PlusClient} from "smartcontractkit-chainlink-evm-0.3.2/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
+import {VRFConsumerBaseV2Plus} from "smartcontractkit-chainlink/vrf/dev/VRFConsumerBaseV2Plus.sol";
+import {VRFV2PlusClient} from "smartcontractkit-chainlink/vrf/dev/libraries/VRFV2PlusClient.sol";
 
 /**
  * @title Simple Raffle Contract
@@ -154,11 +154,11 @@ contract Raffle is VRFConsumerBaseV2Plus {
                     VRFV2PlusClient.ExtraArgsV1({nativePayment: false})
                 )
             });
-        uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
+        s_vrfCoordinator.requestRandomWords(request);
     }
 
     function fulfillRandomWords(
-        uint256 requestId,
+        uint256 /* requestId*/,
         uint256[] calldata randomWords
     ) internal override {
         uint256 indexOfWinner = randomWords[0] % s_players.length;
