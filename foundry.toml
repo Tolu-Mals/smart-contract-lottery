@@ -2,6 +2,10 @@
 src = "src"
 out = "out"
 libs = ["lib", "dependencies"]
+fs_permissions = [
+    { access = "read", path = "./broadcast" },
+    { access = "read", path = "./reports" },
+]
 
 [dependencies]
 smartcontractkit-chainlink-evm = "0.3.2"
@@ -9,9 +13,5 @@ forge-std = "1.11.0"
 "@openzeppelin-contracts" = "4.9.6"
 solmate = "6.8.0"
 cyfrin-foundry-devops = "0.4.0"
-fs_permissions = [
-    { access = "read", path = "./broadcast" },
-    { access = "read", path = "./reports" },
-]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
