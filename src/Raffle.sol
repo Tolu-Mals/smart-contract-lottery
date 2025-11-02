@@ -34,9 +34,9 @@ import {VRFV2PlusClient} from "smartcontractkit-chainlink/vrf/dev/libraries/VRFV
 contract Raffle is VRFConsumerBaseV2Plus {
     // Errors
     error Raffle__SendMoreToEnterRaffle();
-    error Raffle_TransferFailed();
-    error Raffle_RaffleNotOpen();
-    error Raffle_UpkeepNotNeeded(
+    error Raffle__TransferFailed();
+    error Raffle__RaffleNotOpen();
+    error Raffle__UpkeepNotNeeded(
         uint256 balance,
         uint256 playersLength,
         uint256 raffleState
@@ -91,7 +91,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         s_players.push(payable(msg.sender));
 
         if (s_raffleState != RaffleState.OPEN) {
-            revert Raffle_RaffleNotOpen();
+            revert Raffle__RaffleNotOpen();
         }
 
         //Why we emit events?
@@ -132,7 +132,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         (bool upkeepNeeded, ) = checkUpkeep("");
 
         if (!upkeepNeeded) {
-            revert Raffle_UpkeepNotNeeded(
+            revert Raffle__UpkeepNotNeeded(
                 address(this).balance,
                 s_players.length,
                 uint256(s_raffleState)
@@ -172,7 +172,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         (bool success, ) = recentWinner.call{value: address(this).balance}("");
 
         if (!success) {
-            revert Raffle_TransferFailed();
+            revert Raffle__TransferFailed();
         }
 
         emit WinnerPicked(recentWinner);
