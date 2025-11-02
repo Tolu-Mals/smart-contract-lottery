@@ -14,4 +14,7 @@ forge-std = "1.11.0"
 solmate = "6.8.0"
 cyfrin-foundry-devops = "0.4.0"
 
+[fuzz]
+runs = 256
+
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
