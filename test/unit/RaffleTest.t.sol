@@ -117,10 +117,12 @@ contract RaffleTest is Test {
         vm.warp(block.timestamp + interval + 1);
         //we use roll to change the block number
         vm.roll(block.number + 1);
+        raffle.performUpkeep("");
 
         //Act
-        (bool upkeepNeeded, ) = raffle.performUpkeep("");
+        (bool upkeepNeeded, ) = raffle.checkUpkeep("");
 
+        //Assert
         assert(!upkeepNeeded);
     }
 }
