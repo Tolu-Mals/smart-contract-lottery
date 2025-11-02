@@ -92,4 +92,35 @@ contract RaffleTest is Test {
         vm.prank(PLAYER);
         raffle.enterRaffle{value: entranceFee}();
     }
+
+    /*//////////////////////////////////////////////////////////////
+                            CHECK UPKEEP
+    //////////////////////////////////////////////////////////////*/
+
+    function testUpkeepReturnsFalseIfItHasNoBalance() public {
+        //Arrange
+        vm.warp(block.timestamp + interval + 1);
+        vm.roll(block.number + 1);
+
+        //Act
+        (bool upkeepNeeded, ) = raffle.checkUpkeep("");
+
+        //Assert
+        assert(!upkeepNeeded);
+    }
+
+    function testUpkeepReturnsFfalseIfRaffleIsNotOpen() public {
+        //Arrange
+        vm.prank(PLAYER);
+        raffle.enterRaffle{value: entranceFee}();
+        //we need time to pass, we use warp to set the timestamp
+        vm.warp(block.timestamp + interval + 1);
+        //we use roll to change the block number
+        vm.roll(block.number + 1);
+
+        //Act
+        (bool upkeepNeeded, ) = raffle.performUpkeep("");
+
+        assert(!upkeepNeeded);
+    }
 }
