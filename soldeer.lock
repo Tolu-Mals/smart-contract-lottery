@@ -6,6 +6,13 @@ checksum = "57f2cae4b45b91b0847e58c36ea70aee0fb3212cc09b47279627f0764f87e5ee"
 integrity = "861134d6a3739362ce5ef6541538e23ca1df10ec47151f105057bea0bb710330"
 
 [[dependencies]]
+name = "cyfrin-foundry-devops"
+version = "0.4.0"
+url = "https://soldeer-revisions.s3.amazonaws.com/cyfrin-foundry-devops/0_4_0_19-06-2025_06:20:57_cyfrin-foundry-devops-0.4.zip"
+checksum = "73aaa9d3cef0fdb970c8de20f7be9708789c4b9c6f08cacb3176195cdcad095c"
+integrity = "93489aa32cb480802a40c65db03cbeb9429bc972161b47d73d2d93e4788f5529"
+
+[[dependencies]]
 name = "forge-std"
 version = "1.11.0"
 url = "https://soldeer-revisions.s3.amazonaws.com/forge-std/1_11_0_09-10-2025_06:23:22_forge-std-1.11.zip"

@@ -70,7 +70,6 @@ contract HelperConfig is CodeConstants, Script {
         if (localNetworkConfig.vrfCoordinator != address(0)) {
             return localNetworkConfig;
         }
-
         //Deploy mocks and such
         vm.startBroadcast();
         VRFCoordinatorV2_5Mock vrfCoordinatorMock = new VRFCoordinatorV2_5Mock(
@@ -78,6 +77,7 @@ contract HelperConfig is CodeConstants, Script {
             MOCK_GAS_PRICE_LINK,
             MOCK_WEI_PER_UNIT_LINK
         );
+        //deploy our own Link Token
         LinkToken linkToken = new LinkToken();
         vm.stopBroadcast();
 
