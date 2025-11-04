@@ -22,8 +22,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {VRFConsumerBaseV2Plus} from "smartcontractkit-chainlink/vrf/dev/VRFConsumerBaseV2Plus.sol";
-import {VRFV2PlusClient} from "smartcontractkit-chainlink/vrf/dev/libraries/VRFV2PlusClient.sol";
+import {console} from "forge-std/Script.sol";
+import {
+    VRFConsumerBaseV2Plus
+} from "smartcontractkit-chainlink/vrf/dev/VRFConsumerBaseV2Plus.sol";
+import {
+    VRFV2PlusClient
+} from "smartcontractkit-chainlink/vrf/dev/libraries/VRFV2PlusClient.sol";
 
 /**
  * @title Simple Raffle Contract
@@ -194,5 +199,13 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     function getPlayer(uint256 indexOfPlayer) external view returns (address) {
         return s_players[indexOfPlayer];
+    }
+
+    function getLastTimestamp() external view returns (uint256) {
+        return s_lastTimeStamp;
+    }
+
+    function getRecentWinner() external view returns (address) {
+        return s_recentWinner;
     }
 }

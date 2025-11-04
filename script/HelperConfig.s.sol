@@ -2,13 +2,15 @@
 pragma solidity ^0.8.19;
 
 import {Script} from "forge-std/Script.sol";
-import {VRFCoordinatorV2_5Mock} from "smartcontractkit-chainlink/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+import {
+    VRFCoordinatorV2_5Mock
+} from "smartcontractkit-chainlink/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 import {LinkToken} from "test/mocks/LinkToken.sol";
 
 abstract contract CodeConstants {
     // VRF Mock values
-    uint96 public MOCK_BASE_FEE = 0.25 ether;
-    uint96 public MOCK_GAS_PRICE_LINK = 0.25 ether;
+    uint96 public MOCK_BASE_FEE = 0.01 ether;
+    uint96 public MOCK_GAS_PRICE_LINK = 0.0001 ether;
     // LINK/ETH price
     int256 public MOCK_WEI_PER_UNIT_LINK = 4e15;
 
